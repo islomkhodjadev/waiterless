@@ -8,20 +8,51 @@ class Cafebranchcart extends StatelessWidget {
     return Card(
       elevation: 5.0,
       shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(8.0),
+        borderRadius: BorderRadius.circular(16.0),
       ),
-      child: ListTile(
-        leading: Image.asset(
-          "assets/images/cafeimage.jpg",
-          width: 100,
-          fit: BoxFit.cover,
-        ),
-        title: const Text("this is cafe name"),
-        subtitle: GestureDetector(
-            onTap: () {
-              _showFullDescription(context);
-            },
-            child: const Text("this is cafe's description")),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          // Изображение кафе
+          ClipRRect(
+            borderRadius: BorderRadius.vertical(top: Radius.circular(16.0)),
+            child: Image.asset(
+              "assets/images/cafeimage.jpg",
+              width: double.infinity,
+              height: 200, // Увеличенный размер изображения
+              fit: BoxFit.cover,
+            ),
+          ),
+          Padding(
+            padding: const EdgeInsets.all(16.0),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                // Название кафе
+                Text(
+                  "this is cafe name",
+                  style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                        fontWeight: FontWeight.bold,
+                      ),
+                ),
+                const SizedBox(height: 8.0),
+                // Описание кафе с возможностью нажатия
+                GestureDetector(
+                  onTap: () {
+                    _showFullDescription(context);
+                  },
+                  child: Text(
+                    "this is cafe's description",
+                    style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                          color: Colors.grey[700],
+                          fontStyle: FontStyle.italic,
+                        ),
+                  ),
+                ),
+              ],
+            ),
+          ),
+        ],
       ),
     );
   }

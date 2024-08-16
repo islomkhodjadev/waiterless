@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:waiterless/screens/cart_screen.dart';
 import 'package:waiterless/screens/home_screen.dart';
+import 'package:waiterless/screens/profile_screen.dart';
 import 'package:waiterless/utils/colors.dart';
 
 void main() {
@@ -26,10 +27,20 @@ class MyApp extends StatelessWidget {
             inversePrimary: AppColors.greenMain,
           ),
           textTheme: const TextTheme(
+              headlineMedium: TextStyle(
+                fontSize: 24.0,
+                fontWeight: FontWeight.bold,
+                color: Colors.black,
+              ),
+              labelMedium: TextStyle(
+                fontSize: 16.0,
+                fontWeight: FontWeight.normal,
+                color: Colors.grey,
+              ),
               bodyLarge: TextStyle(
-            color: AppColors.white,
-            fontWeight: FontWeight.bold,
-          )),
+                color: AppColors.white,
+                fontWeight: FontWeight.bold,
+              )),
           appBarTheme: const AppBarTheme(
             color: AppColors.greenMain,
           ),
@@ -79,7 +90,7 @@ class _MyHomePageState extends State<MyHomePage> {
   List<Widget> screenOptions = <Widget>[
     const HomeScreen(),
     CartScreen(),
-    const HomeScreen(),
+    ProfileScreen(username: "Islomkhodja"),
   ];
   _onTap(index) {
     setState(() {

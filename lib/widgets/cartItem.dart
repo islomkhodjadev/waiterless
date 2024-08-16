@@ -35,30 +35,63 @@ class _CartItem extends State<CartItem> {
 
   @override
   Widget build(BuildContext context) {
-    return ListTile(
-      title: Text(productTitle),
-      leading: ClipOval(
-        child: Image.asset(
-          "assets/images/product.jpg",
-          width: 60,
-          height: 60,
-          fit: BoxFit.cover,
-        ),
+    return Card(
+      elevation: 4.0,
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(12.0),
       ),
-      subtitle: Text("$productPrice so'm"),
-      trailing: Row(
-        mainAxisSize: MainAxisSize.min,
-        children: [
-          IconButton(
-            icon: const Icon(Icons.remove),
-            onPressed: _decrementQuantity,
+      child: ListTile(
+        contentPadding: EdgeInsets.all(16.0),
+        title: Text(
+          productTitle,
+          style: Theme.of(context).textTheme.headlineMedium?.copyWith(
+                fontWeight: FontWeight.bold,
+              ),
+        ),
+        leading: ClipOval(
+          child: Image.asset(
+            "assets/images/product.jpg",
+            width: 70,
+            height: 70,
+            fit: BoxFit.cover,
           ),
-          Text('$productCount'),
-          IconButton(
-            icon: const Icon(Icons.add),
-            onPressed: _incrementQuantity,
-          ),
-        ],
+        ),
+        subtitle: Text(
+          "$productPrice so'm",
+          style: Theme.of(context).textTheme.labelMedium?.copyWith(
+                color: Colors.green[700],
+                fontWeight: FontWeight.w600,
+              ),
+        ),
+        trailing: Row(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            IconButton(
+              icon: Icon(Icons.remove_circle, color: Colors.redAccent),
+              onPressed: _decrementQuantity,
+            ),
+            Container(
+              padding:
+                  const EdgeInsets.symmetric(horizontal: 12.0, vertical: 6.0),
+              decoration: BoxDecoration(
+                color: Colors.grey[200],
+                borderRadius: BorderRadius.circular(
+                    12.0), // Совпадает с радиусом карточки
+              ),
+              child: Text(
+                '$productCount',
+                style: TextStyle(
+                  fontSize: 18.0,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+            ),
+            IconButton(
+              icon: Icon(Icons.add_circle, color: Colors.blueAccent),
+              onPressed: _incrementQuantity,
+            ),
+          ],
+        ),
       ),
     );
   }
