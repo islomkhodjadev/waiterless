@@ -1,4 +1,5 @@
 import "package:flutter/material.dart";
+import "package:waiterless/screens/cafe_screen.dart";
 
 class Cafebranchcart extends StatelessWidget {
   const Cafebranchcart({super.key});
@@ -14,13 +15,21 @@ class Cafebranchcart extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           // Изображение кафе
-          ClipRRect(
-            borderRadius: BorderRadius.vertical(top: Radius.circular(16.0)),
-            child: Image.asset(
-              "assets/images/cafeimage.jpg",
-              width: double.infinity,
-              height: 200, // Увеличенный размер изображения
-              fit: BoxFit.cover,
+          GestureDetector(
+            onTap: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => CafeScreen()),
+              );
+            },
+            child: ClipRRect(
+              borderRadius: BorderRadius.vertical(top: Radius.circular(16.0)),
+              child: Image.asset(
+                "assets/images/cafeimage.jpg",
+                width: double.infinity,
+                height: 200, // Увеличенный размер изображения
+                fit: BoxFit.cover,
+              ),
             ),
           ),
           Padding(
