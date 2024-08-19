@@ -1,27 +1,49 @@
 import 'package:flutter/material.dart';
 import 'package:waiterless/widgets/appbar.dart';
+import 'package:waiterless/widgets/bluredOrderBar.dart';
 import 'package:waiterless/widgets/foodItem.dart';
 
 class CafeScreen extends StatefulWidget {
+  const CafeScreen({super.key});
+
   @override
   _CafeScreenState createState() => _CafeScreenState();
 }
 
 class _CafeScreenState extends State<CafeScreen> {
-  final List<dynamic> categories = [
-    {
-      'title': 'Drinks',
-      'items': List.generate(6, (index) => FoodItem()), // 6 drink items
-    },
-    {
-      'title': 'Snacks',
-      'items': List.generate(4, (index) => FoodItem()), // 4 snack items
-    },
-    // Add more categories with items as needed
-  ];
+  int totalItemCount = 0;
+  int totalPrice = 0;
+
+  void _Counter(int change, int changePrice) {
+    setState(() {
+      totalItemCount += change;
+      totalPrice += (changePrice * change);
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
+    final List<dynamic> categories = [
+      {
+        'title': 'Drinks',
+        'items': List.generate(
+          6,
+          (index) => FoodItem(
+            onCountChange: _Counter,
+          ),
+        ), // 6 drink items
+      },
+      {
+        'title': 'Snacks',
+        'items': List.generate(
+          4,
+          (index) => FoodItem(
+            onCountChange: _Counter,
+          ),
+        ),
+      },
+    ];
+
     return Scaffold(
       appBar: CustomAppbar(title: "Food"),
       body: ListView.builder(
@@ -41,12 +63,10 @@ class _CafeScreenState extends State<CafeScreen> {
                 shrinkWrap: true,
                 physics: NeverScrollableScrollPhysics(),
                 gridDelegate: SliverGridDelegateWithMaxCrossAxisExtent(
-                  maxCrossAxisExtent:
-                      200.0, // Maximum width of an item in the grid
-                  crossAxisSpacing: 10.0, // Horizontal space between items
-                  mainAxisSpacing: 10.0, // Vertical space between items
-                  childAspectRatio:
-                      0.68, // Adjusted aspect ratio to better fit the content
+                  maxCrossAxisExtent: 200.0,
+                  crossAxisSpacing: 10.0,
+                  mainAxisSpacing: 10.0,
+                  childAspectRatio: 0.68,
                 ),
                 itemCount: categories[categoryIndex]['items'].length,
                 itemBuilder: (context, itemIndex) {
@@ -56,6 +76,10 @@ class _CafeScreenState extends State<CafeScreen> {
             ],
           );
         },
+      ),
+      bottomNavigationBar: BottomBarWithBlur(
+        totalItemCount: totalItemCount,
+        totalPrice: totalPrice,
       ),
     );
   }

@@ -32,7 +32,6 @@ class _ProfileScreen extends State<ProfileScreen> {
                 Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    // Аватар с тенью и кнопкой редактирования
                     Container(
                       decoration: BoxDecoration(
                         shape: BoxShape.circle,

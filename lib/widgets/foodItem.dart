@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 
 class FoodItem extends StatefulWidget {
-  FoodItem({super.key});
+  final Function(int, int) onCountChange;
+
+  const FoodItem({super.key, required this.onCountChange});
 
   @override
   State<FoodItem> createState() {
@@ -93,6 +95,7 @@ class _FoodItem extends State<FoodItem> {
                         onPressed: () {
                           setState(() {
                             count++;
+                            widget.onCountChange(1, 12000);
                           });
                         },
                         style: ElevatedButton.styleFrom(
@@ -112,6 +115,7 @@ class _FoodItem extends State<FoodItem> {
                                 // Decrease the count
                                 if (count > 0) {
                                   count--;
+                                  widget.onCountChange(-1, 1200);
                                 }
                               });
                             },
@@ -136,6 +140,7 @@ class _FoodItem extends State<FoodItem> {
                               setState(() {
                                 // Increase the count
                                 count++;
+                                widget.onCountChange(1, 1200);
                               });
                             },
                             style: ElevatedButton.styleFrom(

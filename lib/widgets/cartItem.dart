@@ -41,11 +41,12 @@ class _CartItem extends State<CartItem> {
         borderRadius: BorderRadius.circular(12.0),
       ),
       child: ListTile(
-        contentPadding: EdgeInsets.all(16.0),
+        contentPadding: EdgeInsets.all(6.0),
         title: Text(
           productTitle,
           style: Theme.of(context).textTheme.headlineMedium?.copyWith(
                 fontWeight: FontWeight.bold,
+                fontSize: 16.0,
               ),
         ),
         leading: ClipOval(
