@@ -41,7 +41,7 @@ class BottomBarWithBlur extends StatelessWidget {
                         style: const TextStyle(
                           fontSize: 20,
                           color: Colors.white,
-                          fontWeight: FontWeight.bold,
+                          fontWeight: FontWeight.normal,
                         ),
                       ),
                       ElevatedButton(
@@ -68,7 +68,7 @@ class BottomBarWithBlur extends StatelessWidget {
                         child: const Text(
                           'Order',
                           style: TextStyle(
-                              fontSize: 18, fontWeight: FontWeight.bold),
+                              fontSize: 18, fontWeight: FontWeight.normal),
                         ),
                       ),
                     ],

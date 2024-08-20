@@ -41,7 +41,7 @@ class Cafebranchcart extends StatelessWidget {
                 Text(
                   "this is cafe name",
                   style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                        fontWeight: FontWeight.bold,
+                        fontWeight: FontWeight.normal,
                       ),
                 ),
                 const SizedBox(height: 8.0),

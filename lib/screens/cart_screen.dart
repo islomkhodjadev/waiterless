@@ -49,10 +49,12 @@ class _CartScreen extends State<CartScreen> {
                     padding: const EdgeInsets.symmetric(vertical: 8.0),
                     child: Text(
                       cafe['cafeName'],
-                      style: const TextStyle(
-                          fontSize: 24,
-                          fontWeight: FontWeight.bold,
-                          color: Colors.black),
+                      style:
+                          Theme.of(context).textTheme.headlineMedium?.copyWith(
+                                fontWeight: FontWeight.bold,
+                                fontSize: 16.0,
+                                color: Colors.green[700],
+                              ),
                     ),
                   ),
                   // List of products for this cafe

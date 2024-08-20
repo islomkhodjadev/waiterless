@@ -13,11 +13,10 @@ class CartModal extends StatelessWidget {
         children: [
           Text(
             "Your Cart",
-            style: TextStyle(
-              fontSize: 24,
-              fontWeight: FontWeight.bold,
-              color: Colors.black,
-            ),
+            style: Theme.of(context).textTheme.headlineMedium?.copyWith(
+                  fontWeight: FontWeight.normal,
+                  fontSize: 16.0,
+                ),
           ),
           SizedBox(height: 10),
           SizedBox(

@@ -31,7 +31,7 @@ class _FoodItem extends State<FoodItem> {
             children: [
               Text(
                 "Full Description",
-                style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+                style: TextStyle(fontSize: 20, fontWeight: FontWeight.normal),
               ),
               SizedBox(height: 10),
               Text(
@@ -55,12 +55,12 @@ class _FoodItem extends State<FoodItem> {
           crossAxisAlignment: CrossAxisAlignment
               .stretch, // Stretches the column to fill Card width
           children: [
-            Padding(
+            const Padding(
               padding: EdgeInsets.all(8.0), // Adds padding around the text
               child: Text(
                 "Cafee",
                 style: TextStyle(
-                  fontWeight: FontWeight.bold, // Optional: makes text bold
+                  fontWeight: FontWeight.normal, // Optional: makes text bold
                 ),
               ),
             ),

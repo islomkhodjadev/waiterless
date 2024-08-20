@@ -30,17 +30,17 @@ class MyApp extends StatelessWidget {
         textTheme: const TextTheme(
           headlineMedium: TextStyle(
             fontSize: 24.0,
-            fontWeight: FontWeight.bold,
-            color: Colors.black,
+            fontWeight: FontWeight.normal,
+            color: Color.fromARGB(255, 0, 0, 0),
           ),
           labelMedium: TextStyle(
             fontSize: 16.0,
             fontWeight: FontWeight.normal,
-            color: Colors.grey,
+            color: Color.fromARGB(255, 52, 52, 52),
           ),
           bodyLarge: TextStyle(
             color: AppColors.white,
-            fontWeight: FontWeight.bold,
+            fontWeight: FontWeight.normal,
           ),
         ),
         appBarTheme: const AppBarTheme(
@@ -77,10 +77,10 @@ class MyApp extends StatelessWidget {
         // '/': (context) => const MyHomePage(title: 'Flutter Demo Home Page'),
         '/': (context) => UserInfoScreen(),
 
-        '/home': (context) => MyHomePage(
+        '/home': (context) => const MyHomePage(
               title: "Home",
             ),
-        '/cart': (context) => CartScreen(),
+        '/cart': (context) => const CartScreen(),
         '/profile': (context) => ProfileScreen(username: "Islomkhodja"),
       },
       debugShowCheckedModeBanner: false,
@@ -102,7 +102,7 @@ class _MyHomePageState extends State<MyHomePage> {
 
   final List<Widget> _screens = [
     const HomeScreen(),
-    CartScreen(),
+    const CartScreen(),
     ProfileScreen(username: "Islomkhodja"),
   ];
 

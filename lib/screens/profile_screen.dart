@@ -65,7 +65,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                     username,
                     style: Theme.of(context).textTheme.headlineMedium?.copyWith(
                           color: Colors.black,
-                          fontWeight: FontWeight.bold,
+                          fontWeight: FontWeight.normal,
                         ),
                   ),
                   const SizedBox(height: 8.0),

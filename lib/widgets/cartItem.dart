@@ -45,7 +45,7 @@ class _CartItem extends State<CartItem> {
         title: Text(
           productTitle,
           style: Theme.of(context).textTheme.headlineMedium?.copyWith(
-                fontWeight: FontWeight.bold,
+                fontWeight: FontWeight.normal,
                 fontSize: 16.0,
               ),
         ),
@@ -83,7 +83,7 @@ class _CartItem extends State<CartItem> {
                 '$productCount',
                 style: TextStyle(
                   fontSize: 18.0,
-                  fontWeight: FontWeight.bold,
+                  fontWeight: FontWeight.normal,
                 ),
               ),
             ),

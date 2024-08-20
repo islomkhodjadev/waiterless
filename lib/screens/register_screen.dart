@@ -42,10 +42,10 @@ class _UserInfoScreenState extends State<UserInfoScreen> {
                 labelText: 'Full Name',
                 border: OutlineInputBorder(),
               ),
-              style: TextStyle(
-                color: Colors.black, // Set the color of the input text here
-                fontSize: 16.0, // You can also adjust the font size
-              ),
+              style: Theme.of(context).textTheme.headlineMedium?.copyWith(
+                    fontWeight: FontWeight.normal,
+                    fontSize: 16.0,
+                  ),
             ),
             SizedBox(height: 20),
             TextField(

@@ -56,7 +56,10 @@ class _CafeScreenState extends State<CafeScreen> {
                 padding: const EdgeInsets.all(8.0),
                 child: Text(
                   categories[categoryIndex]['title'],
-                  style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
+                  style: Theme.of(context).textTheme.headlineMedium?.copyWith(
+                        fontWeight: FontWeight.normal,
+                        fontSize: 24.0,
+                      ),
                 ),
               ),
               GridView.builder(

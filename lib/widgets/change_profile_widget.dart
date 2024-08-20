@@ -53,25 +53,37 @@ class _ChangeProfileDialogState extends State<ChangeProfileDialog> {
               controller: _usernameController,
               decoration:
                   const InputDecoration(labelText: 'Enter new username'),
-              style: const TextStyle(color: Colors.black),
+              style: Theme.of(context).textTheme.headlineMedium?.copyWith(
+                    fontWeight: FontWeight.normal,
+                    fontSize: 16.0,
+                  ),
             ),
             const SizedBox(height: 8.0),
             TextField(
               controller: _addressController,
               decoration: const InputDecoration(labelText: 'Enter new address'),
-              style: const TextStyle(color: Colors.black),
+              style: Theme.of(context).textTheme.headlineMedium?.copyWith(
+                    fontWeight: FontWeight.normal,
+                    fontSize: 16.0,
+                  ),
             ),
             const SizedBox(height: 8.0),
             TextField(
               controller: _emailController,
               decoration: const InputDecoration(labelText: 'Enter new email'),
-              style: const TextStyle(color: Colors.black),
+              style: Theme.of(context).textTheme.headlineMedium?.copyWith(
+                    fontWeight: FontWeight.normal,
+                    fontSize: 16.0,
+                  ),
             ),
             const SizedBox(height: 8.0),
             TextField(
               controller: _infoController,
               decoration: const InputDecoration(labelText: 'Enter new info'),
-              style: const TextStyle(color: Colors.black),
+              style: Theme.of(context).textTheme.headlineMedium?.copyWith(
+                    fontWeight: FontWeight.normal,
+                    fontSize: 16.0,
+                  ),
             ),
           ],
         ),
