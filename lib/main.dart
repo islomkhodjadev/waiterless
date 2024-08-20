@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:waiterless/screens/cart_screen.dart';
 import 'package:waiterless/screens/home_screen.dart';
 import 'package:waiterless/screens/profile_screen.dart';
+import 'package:waiterless/screens/register_screen.dart';
 import 'package:waiterless/utils/colors.dart';
 
 void main() {
@@ -73,8 +74,12 @@ class MyApp extends StatelessWidget {
       ),
       initialRoute: '/',
       routes: {
-        '/': (context) => const MyHomePage(title: 'Flutter Demo Home Page'),
-        '/home': (context) => const HomeScreen(),
+        // '/': (context) => const MyHomePage(title: 'Flutter Demo Home Page'),
+        '/': (context) => UserInfoScreen(),
+
+        '/home': (context) => MyHomePage(
+              title: "Home",
+            ),
         '/cart': (context) => CartScreen(),
         '/profile': (context) => ProfileScreen(username: "Islomkhodja"),
       },
