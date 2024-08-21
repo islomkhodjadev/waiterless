@@ -12,7 +12,9 @@ class CacheManager {
 
   Future<void> saveData<T>(String key, T data) async {
     var box = await Hive.openBox('cacheBox');
-    if (data is JsonSerializable) {
+    print(T);
+    if (data is dynamic && data.toJson != null) {
+      print("helloo -----------------------");
       box.put(key, data.toJson());
     } else {
       throw ArgumentError(
@@ -23,12 +25,7 @@ class CacheManager {
   Future<T?> getData<T>(String key) async {
     var box = await Hive.openBox('cacheBox');
     var json = box.get(key);
-
-    if (json != null && json is Map<String, dynamic> || json is List<Map>) {
-      return json;
-    }
-
-    return null;
+    return json;
   }
 
   Future<void> removeData(String key) async {

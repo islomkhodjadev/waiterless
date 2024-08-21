@@ -24,7 +24,6 @@ class User implements JsonSerializable {
     required this.address,
     this.profileImageBase64, // Optional image
   });
-
   @override
   Map<String, dynamic> toJson() {
     return {
@@ -37,7 +36,7 @@ class User implements JsonSerializable {
     };
   }
 
-  factory User.fromJson(Map<String, dynamic> json) {
+  factory User.fromJson(Map<dynamic, dynamic> json) {
     return User(
       id: json['id'],
       username: json['username'],
@@ -51,12 +50,33 @@ class User implements JsonSerializable {
 
   // Static method to write a User to cache
   static Future<void> writeToCache(User user) async {
-    await CacheManager().saveData("user", user.toJson());
+    await CacheManager().saveData<JsonSerializable>("user", user);
+  }
+
+  User copyWith({
+    int? id,
+    String? username,
+    String? phoneNumber,
+    String? info,
+    String? address,
+    String? profileImageBase64,
+  }) {
+    return User(
+      id: id ?? this.id,
+      username: username ?? this.username,
+      phoneNumber: phoneNumber ?? this.phoneNumber,
+      info: info ?? this.info,
+      address: address ?? this.address,
+      profileImageBase64: profileImageBase64 ?? this.profileImageBase64,
+    );
   }
 
   // Static method to read a User from cache
   static Future<User?> readFromCache() async {
     var json = await CacheManager().getData("user");
+    print("------------------");
+    print(json);
+    print("-------------------------");
     if (json != null) {
       return User.fromJson(json);
     }

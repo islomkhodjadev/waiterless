@@ -1,11 +1,16 @@
+import 'dart:convert';
+import 'dart:io';
+
 import 'package:flutter/material.dart';
+import 'package:image_picker/image_picker.dart';
 
 class ChangeProfileDialog extends StatefulWidget {
   final String initialUsername;
   final String initialAddress;
   final String initialPhoneNumber;
   final String initialInfo;
-  final Function(String, String, String, String) onSave;
+  final String? initialProfileImageBase64;
+  final Function(String, String, String, String, String?) onSave;
 
   const ChangeProfileDialog({
     super.key,
@@ -13,6 +18,7 @@ class ChangeProfileDialog extends StatefulWidget {
     required this.initialAddress,
     required this.initialPhoneNumber,
     required this.initialInfo,
+    required this.initialProfileImageBase64,
     required this.onSave,
   });
 
@@ -23,22 +29,39 @@ class ChangeProfileDialog extends StatefulWidget {
 class _ChangeProfileDialogState extends State<ChangeProfileDialog> {
   late TextEditingController _usernameController;
   late TextEditingController _addressController;
-  late TextEditingController _emailController;
+  late TextEditingController _phoneNumberController;
   late TextEditingController _infoController;
+  String? _selectedProfileImageBase64;
+
   @override
   void initState() {
     super.initState();
     _usernameController = TextEditingController(text: widget.initialUsername);
     _addressController = TextEditingController(text: widget.initialAddress);
-    _emailController = TextEditingController(text: widget.initialPhoneNumber);
+    _phoneNumberController =
+        TextEditingController(text: widget.initialPhoneNumber);
     _infoController = TextEditingController(text: widget.initialInfo);
+    _selectedProfileImageBase64 = widget.initialProfileImageBase64;
+  }
+
+  Future<void> _pickImage() async {
+    final picker = ImagePicker();
+    final pickedFile = await picker.pickImage(source: ImageSource.gallery);
+
+    if (pickedFile != null) {
+      final bytes = File(pickedFile.path).readAsBytesSync();
+      setState(() {
+        _selectedProfileImageBase64 = base64Encode(bytes);
+      });
+    }
   }
 
   @override
   void dispose() {
     _usernameController.dispose();
     _addressController.dispose();
-    _emailController.dispose();
+    _phoneNumberController.dispose();
+    _infoController.dispose();
     super.dispose();
   }
 
@@ -49,6 +72,20 @@ class _ChangeProfileDialogState extends State<ChangeProfileDialog> {
       content: SingleChildScrollView(
         child: Column(
           children: [
+            GestureDetector(
+              onTap: _pickImage,
+              child: CircleAvatar(
+                radius: 50,
+                backgroundImage: _selectedProfileImageBase64 != null
+                    ? MemoryImage(base64Decode(_selectedProfileImageBase64!))
+                    : const AssetImage("assets/images/product.jpg")
+                        as ImageProvider,
+                child: _selectedProfileImageBase64 == null
+                    ? const Icon(Icons.camera_alt)
+                    : null,
+              ),
+            ),
+            const SizedBox(height: 16.0),
             TextField(
               controller: _usernameController,
               decoration:
@@ -69,8 +106,9 @@ class _ChangeProfileDialogState extends State<ChangeProfileDialog> {
             ),
             const SizedBox(height: 8.0),
             TextField(
-              controller: _emailController,
-              decoration: const InputDecoration(labelText: 'Enter new email'),
+              controller: _phoneNumberController,
+              decoration:
+                  const InputDecoration(labelText: 'Enter new phone number'),
               style: Theme.of(context).textTheme.headlineMedium?.copyWith(
                     fontWeight: FontWeight.normal,
                     fontSize: 16.0,
@@ -97,60 +135,18 @@ class _ChangeProfileDialogState extends State<ChangeProfileDialog> {
         ),
         TextButton(
           onPressed: () {
-            widget.onSave(_usernameController.text, _addressController.text,
-                _emailController.text, _infoController.text);
+            widget.onSave(
+              _usernameController.text,
+              _addressController.text,
+              _phoneNumberController.text,
+              _infoController.text,
+              _selectedProfileImageBase64, // Pass the selected or updated image
+            );
             Navigator.of(context).pop();
           },
           child: const Text('Save'),
         ),
       ],
-    );
-  }
-}
-
-class ProfilePicture extends StatelessWidget {
-  final VoidCallback onEditPressed;
-
-  const ProfilePicture({super.key, required this.onEditPressed});
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      decoration: BoxDecoration(
-        shape: BoxShape.circle,
-        boxShadow: [
-          BoxShadow(
-            color: Colors.grey.withOpacity(0.5),
-            spreadRadius: 5,
-            blurRadius: 15,
-            offset: const Offset(0, 3),
-          ),
-        ],
-      ),
-      child: Stack(
-        children: [
-          ClipOval(
-            child: Image.asset(
-              "assets/images/product.jpg", // Update this with your image path
-              width: 150,
-              height: 150,
-              fit: BoxFit.cover,
-            ),
-          ),
-          Positioned(
-            top: 0,
-            right: 0,
-            child: CircleAvatar(
-              radius: 20,
-              backgroundColor: Colors.blue,
-              child: IconButton(
-                icon: const Icon(Icons.edit, color: Colors.white),
-                onPressed: onEditPressed,
-              ),
-            ),
-          ),
-        ],
-      ),
     );
   }
 }

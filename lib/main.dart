@@ -1,16 +1,31 @@
 import 'package:flutter/material.dart';
+import 'package:hive/hive.dart';
+import 'package:path_provider/path_provider.dart';
+import 'package:waiterless/models/userData.dart';
 import 'package:waiterless/screens/cart_screen.dart';
 import 'package:waiterless/screens/home_screen.dart';
 import 'package:waiterless/screens/profile_screen.dart';
 import 'package:waiterless/screens/register_screen.dart';
 import 'package:waiterless/utils/colors.dart';
 
-void main() {
-  runApp(const MyApp());
+void main() async {
+  WidgetsFlutterBinding
+      .ensureInitialized(); // Ensures all bindings are set up correctly before running the app
+
+  var appDocumentDir = await getApplicationDocumentsDirectory();
+  Hive.init(appDocumentDir.path);
+  User? cachedUser = await User.readFromCache();
+  String initialRoute = cachedUser != null ? '/home' : '/';
+
+  runApp(MyApp(
+    initialRoute: initialRoute,
+  ));
 }
 
 class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+  final String initialRoute;
+
+  MyApp({super.key, required this.initialRoute});
 
   @override
   Widget build(BuildContext context) {
@@ -72,7 +87,7 @@ class MyApp extends StatelessWidget {
         ),
         useMaterial3: true,
       ),
-      initialRoute: '/',
+      initialRoute: initialRoute,
       routes: {
         // '/': (context) => const MyHomePage(title: 'Flutter Demo Home Page'),
         '/': (context) => UserInfoScreen(),
