@@ -9,13 +9,25 @@ class CustomAppbar extends StatelessWidget implements PreferredSizeWidget {
   @override
   Widget build(BuildContext context) {
     return AppBar(
-      title: Text(title, style: Theme.of(context).textTheme.bodyLarge),
+      leading: IconButton(
+        icon: Icon(Icons.arrow_back,
+            color: const Color.fromARGB(
+                255, 0, 0, 0)), // Specify the color directly here
+        onPressed: () {
+          Navigator.of(context).pop();
+        },
+      ),
+      title: Text(title,
+          style: Theme.of(context)
+              .textTheme
+              .bodyLarge
+              ?.copyWith(color: Colors.black, fontWeight: FontWeight.bold)),
       centerTitle: true,
       actions: [
         IconButton(
           icon: const Icon(
             Icons.mic,
-            color: Colors.white,
+            color: Color.fromARGB(255, 0, 0, 0),
           ),
           onPressed: () => _showListeningPopup(context),
         ),

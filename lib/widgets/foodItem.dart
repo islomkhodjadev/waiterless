@@ -1,9 +1,21 @@
 import 'package:flutter/material.dart';
 
 class FoodItem extends StatefulWidget {
-  final Function(int, int) onCountChange;
+  final Function(int, double) onCountChange;
+  final String name;
+  final int id;
+  final String description;
+  final String image;
+  final double price;
 
-  const FoodItem({super.key, required this.onCountChange});
+  const FoodItem(
+      {super.key,
+      required this.onCountChange,
+      required this.id,
+      required this.name,
+      required this.description,
+      required this.image,
+      required this.price});
 
   @override
   State<FoodItem> createState() {
@@ -18,8 +30,8 @@ class _FoodItem extends State<FoodItem> {
       context: context,
       builder: (BuildContext context) {
         return Container(
-          padding: EdgeInsets.all(20),
-          decoration: BoxDecoration(
+          padding: const EdgeInsets.all(20),
+          decoration: const BoxDecoration(
             borderRadius: BorderRadius.only(
               topLeft: Radius.circular(20),
               topRight: Radius.circular(20),
@@ -29,13 +41,13 @@ class _FoodItem extends State<FoodItem> {
           child: Column(
             mainAxisSize: MainAxisSize.min,
             children: [
-              Text(
+              const Text(
                 "Full Description",
                 style: TextStyle(fontSize: 20, fontWeight: FontWeight.normal),
               ),
-              SizedBox(height: 10),
+              const SizedBox(height: 10),
               Text(
-                "Here is the detailed description of the cafe product. You can provide more info here such as ingredients, nutritional facts, etc.",
+                widget.description,
                 textAlign: TextAlign.justify,
               ),
             ],
@@ -55,17 +67,18 @@ class _FoodItem extends State<FoodItem> {
           crossAxisAlignment: CrossAxisAlignment
               .stretch, // Stretches the column to fill Card width
           children: [
-            const Padding(
-              padding: EdgeInsets.all(8.0), // Adds padding around the text
+            Padding(
+              padding:
+                  const EdgeInsets.all(8.0), // Adds padding around the text
               child: Text(
-                "Cafee",
-                style: TextStyle(
+                widget.name,
+                style: const TextStyle(
                   fontWeight: FontWeight.normal, // Optional: makes text bold
                 ),
               ),
             ),
             Padding(
-              padding: EdgeInsets.symmetric(
+              padding: const EdgeInsets.symmetric(
                   horizontal: 8.0), // Adds horizontal padding around the image
               child: AspectRatio(
                 aspectRatio:
@@ -79,7 +92,7 @@ class _FoodItem extends State<FoodItem> {
                     borderRadius: BorderRadius.circular(
                         8.0), // Matches the border's borderRadius
                     child: Image.asset(
-                      "assets/images/product.jpg",
+                      widget.image,
                       fit: BoxFit
                           .cover, // Ensures the image covers the space without changing aspect ratio
                     ),
@@ -87,15 +100,15 @@ class _FoodItem extends State<FoodItem> {
                 ),
               ),
             ),
-            Spacer(), // Adds flexible space between image and button
+            const Spacer(), // Adds flexible space between image and button
             Padding(
-                padding: EdgeInsets.all(8.0),
+                padding: const EdgeInsets.all(8.0),
                 child: count == 0
                     ? ElevatedButton(
                         onPressed: () {
                           setState(() {
                             count++;
-                            widget.onCountChange(1, 12000);
+                            widget.onCountChange(1, widget.price);
                           });
                         },
                         style: ElevatedButton.styleFrom(
@@ -104,7 +117,7 @@ class _FoodItem extends State<FoodItem> {
                               .onPrimaryFixedVariant, // Background color of the button
                           foregroundColor: Colors.white, // Text color
                         ),
-                        child: Text("Add +"),
+                        child: const Text("Add +"),
                       )
                     : Row(
                         mainAxisAlignment: MainAxisAlignment.center,
@@ -115,7 +128,7 @@ class _FoodItem extends State<FoodItem> {
                                 // Decrease the count
                                 if (count > 0) {
                                   count--;
-                                  widget.onCountChange(-1, 1200);
+                                  widget.onCountChange(-1, widget.price);
                                 }
                               });
                             },
@@ -140,7 +153,7 @@ class _FoodItem extends State<FoodItem> {
                               setState(() {
                                 // Increase the count
                                 count++;
-                                widget.onCountChange(1, 1200);
+                                widget.onCountChange(1, widget.price);
                               });
                             },
                             style: ElevatedButton.styleFrom(

@@ -1,13 +1,16 @@
 import 'package:flutter/material.dart';
+import 'package:waiterless/models/cartItemData.dart';
 import 'package:waiterless/widgets/cartItem.dart';
 
 class CartModal extends StatelessWidget {
-  const CartModal({super.key});
+  List<Map<String, dynamic>> orders;
+
+  CartModal({super.key, required this.orders});
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: EdgeInsets.all(16.0),
+      padding: const EdgeInsets.all(16.0),
       child: Column(
         mainAxisSize: MainAxisSize.min,
         children: [
@@ -18,16 +21,18 @@ class CartModal extends StatelessWidget {
                   fontSize: 16.0,
                 ),
           ),
-          SizedBox(height: 10),
+          const SizedBox(height: 10),
           SizedBox(
-            height: 300.0, // Adjust the height according to your needs
+            height: 300.0,
             child: ListView.builder(
-              itemCount: 5, // Assuming cartItems is a list of CartItem objects
+              itemCount: orders.length,
               itemBuilder: (context, index) {
-                return const CartItem(
-                  productTitle: "Cafee",
-                  productCount: 5,
-                  productPrice: 5,
+                return CartItem(
+                  name: orders[index]["name"],
+                  productCount: orders[index]["count"],
+                  price: orders[index]["price"],
+                  image: orders[index]["image"],
+                  id: orders[index]["id"],
                 );
               },
             ),

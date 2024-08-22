@@ -13,8 +13,9 @@ class CacheManager {
   Future<void> saveData<T>(String key, T data) async {
     var box = await Hive.openBox('cacheBox');
     print(T);
-    if (data is dynamic && data.toJson != null) {
-      print("helloo -----------------------");
+    if (data is List<dynamic>) {
+      box.put(key, data);
+    } else if (data is dynamic && data.toJson != null) {
       box.put(key, data.toJson());
     } else {
       throw ArgumentError(
@@ -24,7 +25,7 @@ class CacheManager {
 
   Future<T?> getData<T>(String key) async {
     var box = await Hive.openBox('cacheBox');
-    var json = box.get(key);
+    var json = await box.get(key);
     return json;
   }
 

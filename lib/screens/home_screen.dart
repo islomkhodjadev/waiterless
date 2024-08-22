@@ -1,9 +1,11 @@
 import "package:flutter/material.dart";
 import "package:waiterless/widgets/appbar.dart";
 import "package:waiterless/widgets/cafeBranchCart.dart";
+import "package:waiterless/data.dart";
 
 class HomeScreen extends StatelessWidget {
-  const HomeScreen({super.key});
+  final List<Map<String, dynamic>> cafeBranches = cafebranches;
+  HomeScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -14,9 +16,14 @@ class HomeScreen extends StatelessWidget {
         body: Padding(
           padding: const EdgeInsets.all(8.0),
           child: ListView.builder(
-            itemCount: 5,
+            itemCount: cafebranches.length,
             itemBuilder: (context, index) {
-              return const Cafebranchcart();
+              var currentCafeBracnh = cafeBranches[index];
+              return Cafebranchcart(
+                  id: currentCafeBracnh["id"],
+                  description: currentCafeBracnh["description"],
+                  name: currentCafeBracnh["name"],
+                  image: currentCafeBracnh["image"]);
             },
           ),
         ));

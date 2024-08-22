@@ -72,10 +72,10 @@ class _UserInfoScreenState extends State<UserInfoScreen> {
             ),
             SizedBox(height: 20),
             TextField(
-              style: TextStyle(
-                color: Colors.black,
-                fontSize: 16.0,
-              ),
+              style: Theme.of(context).textTheme.headlineMedium?.copyWith(
+                    fontWeight: FontWeight.normal,
+                    fontSize: 16.0,
+                  ),
               controller: _phoneController,
               decoration: InputDecoration(
                 labelText: 'Phone Number',
@@ -90,9 +90,10 @@ class _UserInfoScreenState extends State<UserInfoScreen> {
                 labelText: 'Address',
                 border: OutlineInputBorder(),
               ),
-              style: TextStyle(
-                fontSize: 16.0,
-              ),
+              style: Theme.of(context).textTheme.headlineMedium?.copyWith(
+                    fontWeight: FontWeight.normal,
+                    fontSize: 16.0,
+                  ),
             ),
             SizedBox(height: 20),
             TextField(
@@ -101,9 +102,10 @@ class _UserInfoScreenState extends State<UserInfoScreen> {
                 labelText: 'Additional Info',
                 border: OutlineInputBorder(),
               ),
-              style: TextStyle(
-                fontSize: 16.0,
-              ),
+              style: Theme.of(context).textTheme.headlineMedium?.copyWith(
+                    fontWeight: FontWeight.normal,
+                    fontSize: 16.0,
+                  ),
             ),
             SizedBox(height: 20),
             ElevatedButton(

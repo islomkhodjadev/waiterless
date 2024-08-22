@@ -1,16 +1,19 @@
 import "package:flutter/material.dart";
 
 class CartItem extends StatefulWidget {
-  final String productTitle;
-  final double productPrice;
   final int productCount;
+  final String name;
+  final int id;
+  final String image;
+  final double price;
 
   const CartItem(
       {super.key,
-      required this.productTitle,
+      required this.id,
+      required this.name,
       required this.productCount,
-      required this.productPrice});
-
+      required this.image,
+      required this.price});
   @override
   State<CartItem> createState() {
     return _CartItem();
@@ -18,9 +21,9 @@ class CartItem extends StatefulWidget {
 }
 
 class _CartItem extends State<CartItem> {
-  String productTitle = "";
-  double productPrice = 0.0;
-  int productCount = 0;
+  late String productTitle;
+  late double productPrice;
+  late int productCount;
 
   void _decrementQuantity() {}
   void _incrementQuantity() {}
@@ -29,8 +32,8 @@ class _CartItem extends State<CartItem> {
   void initState() {
     super.initState();
     productCount = widget.productCount;
-    productPrice = widget.productPrice;
-    productTitle = widget.productTitle;
+    productPrice = widget.price;
+    productTitle = widget.name;
   }
 
   @override
@@ -51,14 +54,14 @@ class _CartItem extends State<CartItem> {
         ),
         leading: ClipOval(
           child: Image.asset(
-            "assets/images/product.jpg",
+            widget.image,
             width: 70,
             height: 70,
             fit: BoxFit.cover,
           ),
         ),
         subtitle: Text(
-          "$productPrice so'm",
+          "${productPrice * productCount} so'm",
           style: Theme.of(context).textTheme.labelMedium?.copyWith(
                 color: Colors.green[700],
                 fontWeight: FontWeight.w600,

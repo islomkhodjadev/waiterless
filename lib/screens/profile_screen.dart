@@ -180,7 +180,6 @@ class _ProfileScreenState extends State<ProfileScreen> {
                         ElevatedButton.icon(
                           onPressed: () {
                             print(_user?.username ?? '');
-                            // Logic for sending a message
                           },
                           icon: const Icon(Icons.message, color: Colors.white),
                           label: const Text("Message"),

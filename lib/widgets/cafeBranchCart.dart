@@ -2,7 +2,17 @@ import "package:flutter/material.dart";
 import "package:waiterless/screens/cafe_screen.dart";
 
 class Cafebranchcart extends StatelessWidget {
-  const Cafebranchcart({super.key});
+  String image;
+  String name;
+  int id;
+  String description;
+
+  Cafebranchcart(
+      {super.key,
+      required this.id,
+      required this.name,
+      required this.description,
+      required this.image});
 
   @override
   Widget build(BuildContext context) {
@@ -25,7 +35,7 @@ class Cafebranchcart extends StatelessWidget {
             child: ClipRRect(
               borderRadius: BorderRadius.vertical(top: Radius.circular(16.0)),
               child: Image.asset(
-                "assets/images/cafeimage.jpg",
+                image,
                 width: double.infinity,
                 height: 200, // Увеличенный размер изображения
                 fit: BoxFit.cover,
@@ -39,7 +49,7 @@ class Cafebranchcart extends StatelessWidget {
               children: [
                 // Название кафе
                 Text(
-                  "this is cafe name",
+                  name,
                   style: Theme.of(context).textTheme.bodyMedium?.copyWith(
                         fontWeight: FontWeight.normal,
                       ),
@@ -51,7 +61,7 @@ class Cafebranchcart extends StatelessWidget {
                     _showFullDescription(context);
                   },
                   child: Text(
-                    "this is cafe's description",
+                    description,
                     style: Theme.of(context).textTheme.bodyMedium?.copyWith(
                           color: Colors.grey[700],
                           fontStyle: FontStyle.italic,
@@ -72,10 +82,8 @@ class Cafebranchcart extends StatelessWidget {
       builder: (BuildContext context) {
         return AlertDialog(
           title: const Text("Full Description"),
-          content: const Text(
-            "This is the full description of the cafe. "
-            "It includes all the details about the cafe, such as its location, "
-            "specialties, history, and much more.",
+          content: Text(
+            description,
           ),
           actions: [
             TextButton(

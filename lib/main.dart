@@ -59,7 +59,7 @@ class MyApp extends StatelessWidget {
           ),
         ),
         appBarTheme: const AppBarTheme(
-          color: AppColors.greenMain,
+          color: Color.fromARGB(255, 255, 255, 255),
         ),
         buttonTheme: const ButtonThemeData(
           buttonColor: AppColors.greenMain,
@@ -116,7 +116,7 @@ class _MyHomePageState extends State<MyHomePage> {
   int _page = 0;
 
   final List<Widget> _screens = [
-    const HomeScreen(),
+    HomeScreen(),
     const CartScreen(),
     ProfileScreen(username: "Islomkhodja"),
   ];

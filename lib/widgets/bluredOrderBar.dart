@@ -1,27 +1,29 @@
 import 'dart:ui';
 import 'package:flutter/material.dart';
+import 'package:waiterless/models/cartItemData.dart';
 import 'package:waiterless/widgets/cardModal.dart';
 
 class BottomBarWithBlur extends StatelessWidget {
   final int totalItemCount;
-  final int totalPrice;
+  final double totalPrice;
+  List<Map<String, dynamic>> orders;
 
-  const BottomBarWithBlur({
+  BottomBarWithBlur({
     required this.totalItemCount,
     required this.totalPrice,
+    required this.orders,
     super.key,
   });
 
   @override
   Widget build(BuildContext context) {
-    // Ensure totalItemCount > 0 to display the bottom bar
     return totalItemCount > 0
         ? InkWell(
             onTap: () {
               showModalBottomSheet(
                 context: context,
                 builder: (BuildContext context) {
-                  return const CartModal(); // Assuming CartModal is defined elsewhere
+                  return CartModal(orders: orders);
                 },
               );
             },
@@ -31,8 +33,7 @@ class BottomBarWithBlur extends StatelessWidget {
                 child: Container(
                   padding: const EdgeInsets.symmetric(
                       horizontal: 16.0, vertical: 10.0),
-                  color: Colors.green
-                      .withOpacity(0.5), // Semi-transparent green background
+                  color: Colors.green.withOpacity(0.5),
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
@@ -52,7 +53,25 @@ class BottomBarWithBlur extends StatelessWidget {
                                   'Are you sure? You don\'t want to order anything else?'),
                               action: SnackBarAction(
                                 label: 'Yes',
-                                onPressed: () {
+                                onPressed: () async {
+                                  for (int i = 0; i < orders.length; i++) {
+                                    var item = await CartItemData.getCartItem(
+                                        orders[i]["id"]);
+                                    if (item == null) {
+                                      CartItemData.addCartItem(CartItemData(
+                                          productId: orders[i]["id"],
+                                          productCount: 1,
+                                          totalPrice: orders[i]["price"],
+                                          productName: orders[i]["name"]));
+                                    } else {
+                                      CartItemData.addCartItem(CartItemData(
+                                          productId: orders[i]["id"],
+                                          productCount: (item.productCount + 1),
+                                          totalPrice: orders[i]["price"],
+                                          productName: orders[i]["name"]));
+                                    }
+                                  }
+
                                   Navigator.pushReplacementNamed(
                                       context, "/cart");
                                 },
@@ -77,7 +96,6 @@ class BottomBarWithBlur extends StatelessWidget {
               ),
             ),
           )
-        : const SizedBox
-            .shrink(); // Return an empty widget when there's no item count
+        : const SizedBox.shrink();
   }
 }
